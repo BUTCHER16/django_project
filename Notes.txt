@@ -1,0 +1,3 @@
+Learned about the Application and Routes 
+
+created views in the main app and routed it into the django_project and created that [ home and about ]
