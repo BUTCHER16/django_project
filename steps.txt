@@ -1,0 +1,70 @@
+## Templates ##
+
+<-- TASK --> Instead of returning Http Responce return an html templates?
+
+1) create a home and about html?
+
+2) add the created applications to the projects?
+
+3) return the html content of home, about to the views.py 
+
+
+4) create a dummy post that need to be added to the page?
+
+5) create a context dictionary below the home function and include that in the return render?
+
+6) call the context dictionary in the home page and use the content in the post
+
+7) set condition for the title #like ( if we gave the title it should provide the title and if not it can just reply with django {page} ) and also pass the title in the views?
+
+8) make the home and about file to get the page from the base file
+
+9) copy the Bootstrap starter template(https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa3NiWWJXUkEzQW5rX2FSak9Ha09BVU9CUjhKUXxBQ3Jtc0ttdjZQQnJHc3B0Q3B6ZmkzU3FjYmgzenpnUHUwaHlHV0RDVV9yeDVuQ1hJSUthUDBNNHdJclJWeXljRG8tSUxVdk5WVnZsV3dwS1RlZEhUamZQaEcybzdqeDB4bHc5V2hfUHNhcXppUWtfSkJuQzZHUQ&q=https%3A%2F%2Fgetbootstrap.com%2Fdocs%2F4.0%2Fgetting-started%2Fintroduction%2F%23starter-template&v=qDwdMDQ8oX4)
+and use the container div to the base html
+
+10) Add a Navigation bar to the base template from the snippets from corey and also copy the main.html template from (https://github.com/CoreyMSchafer/code_snippets/tree/master/Django_Blog/snippets)
+
+11) create a new static folder in the app to put the css file static folder and link the css in base
+
+12) Copy the Article.html file and use that article file to show the author post content in base file
+
+13) Give the dynamic code block url to the home and about page in the base file?
+
+-- Admin Page --
+#you can't able to log in as admin unless you create a admin login and password, and to need to migrate to databases
+
+1) complete the migration process and create a superuser account
+
+-- DataBases --
+
+1) create a post Models for the DB 
+	{ create a title
+	  content
+	  date_posted
+	  author as a foreign key
+		}
+2) import the needed modules like timezone, Userdate_posted 
+
+3) Make the migrations and update to the DataBases
+
+4) use the sql shelland import the following Post class, User
+
+5)task:
+	Print the Users
+	Print the First Users
+	assign a variable to a first user
+	print the user
+	print the user id
+	print the Post table
+ 
+6) give the Data to the post_1 in the DB?
+
+7) create a dunder str in the models file to show the title or something in the admin page?
+
+8) import the post in the views and delete the post content in the views page and pass the Post ?
+
+9) set date format in the home?
+
+10) register Post in the admin panel
+
+	
