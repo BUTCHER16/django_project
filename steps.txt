@@ -67,4 +67,126 @@ and use the container div to the base html
 
 10) register Post in the admin panel
 
-	
+--User Registrations--
+
+Create a New User app so we can hadle all the user logic :)
+
+1) Regiser User app in the Settings installed app
+
+2) create a register views in the Users app ( Function )
+
+3) we want to create a form so that the user can register, if we want to build the form from scratch it will be mre complicated so the django already have the form modules just like the models in the databases
+
+4) import the User creation forms{ from django.contrib.auth.forms import UserCreationForm }
+
+5) return and render the Template which uses this form
+
+6) Create a templates folder in the User app and create a register.html
+
+7) Create a form inside the Div section and assion class as contetn-section and assign method="POST" in form
+
+8)Set an csrf Token to encrypt the Form values
+
+9) Complete the template with buttons and some other features and if the user already have an account give the option to just login
+
+10) Create a Url Pattern in the main Urls.py by importing " from users import views as user_views " give the path 'register/' and the user_views.register and assign a name
+
+" If anyone is doing this tutorial and having troubles with crispy forms, with the help of tutorial and some comments, I found that this works:
+
+1) pip install django_crispy_forms
+2) pip install crispy_bootstrap4
+3) Add both of these to INSTALLED_APPS:
+    'crispy_forms',
+    'crispy_bootstrap4',
+4) Add both of these at the bottom:
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+5) Use {% load crispy_forms_tags %} and {{ form|crispy }} in the html file.
+
+As always, great tutorial, thank you, Corey!
+
+ "
+
+--After this We can view the User Registration form -- 
+
+11) create the following 
+	if request.method=='POST':
+		form = UserCreationFrom(request.POST)
+		if form.is_valid():
+			username = form.cleaned_data.get('username')
+	else:
+		form=UserCreationForm()
+	return render(request, 'register.html', {'form':form})
+
+
+and import messages
+
+12) create a flash message when we press the buttons "messages.succes(request, f'Accunt created for {username}!')"
+
+13) and when user created redirect to the blog home
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            form.save()
+            messages.success(request, f'Account created for {username}')
+            return redirect('blog-home')
+
+    else:
+        form = UserCreationForm()
+
+    return render(request, 'register.html',{'form':form})
+
+	and change in the base.html for Messages to show
+
+' forms is linked with the DB but How , we are import the Form from the DB so it will be Linked '
+
+14) How to add a new Field in the Form For that we neeed to Create a Form.py file
+
+from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+
+class UserRegisterForm(UserCreationForm):
+    email = forms.EmailField()
+
+    class meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+        
+15) Change the imported forms in the views .py
+
+-- Login and Logout --
+
+1) django internally gives us the login and logout forms so we r going to import that
+	' from django.contrib.auth import views as auth_views ' in main urls
+
+2)  path('login/', auth_views.LoginView.as_view(), name = 'login'),
+	path('logout/', auth_views.LogoutView.as_view, name = 'logout'),
+
+3) copy the register file adjust the login and logout html
+
+4) set in the settings.py inthe End and add " LOGIN_REDIRECT_URL = 'blog-home' "
+
+5) After Registered we need to redirect to the Login Page
+
+6) After Logged Out it need to display LoggedOut and login again
+
+after this ogout page will not working " If you have error 405 page on logout page it may be due to latest django version this is what I did to get round it. In users views folder i put this code 
+from django.contrib.auth import logout
+def logout_view(request):
+    logout(request)
+    return render(request, 'users/logout.html')
+
+then in main project urls I put this in urr parttern list
+ path("logout/", user_views.logout_view, name="logout"), "
+
+7) change the Base Page like ig you have logged in the nav bar should be different and if its not 
+	"{% if user.is_authenticated %}
+                <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+              {% else %}
+                <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+              {% endif %}"

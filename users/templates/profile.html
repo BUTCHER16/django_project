@@ -1,0 +1,7 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% for post in posts %}
+    <h1>{{ post.date_posted }}</h1>
+{% endfor %}
+{% endblock content %}
