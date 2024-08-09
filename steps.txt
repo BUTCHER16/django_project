@@ -183,10 +183,36 @@ def logout_view(request):
 then in main project urls I put this in urr parttern list
  path("logout/", user_views.logout_view, name="logout"), "
 
-7) change the Base Page like ig you have logged in the nav bar should be different and if its not 
+7) change the Base Page like if you have logged in the nav bar should be different and if its not 
 	"{% if user.is_authenticated %}
                 <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
               {% else %}
                 <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
                 <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
               {% endif %}"
+
+8) Create a profile page for the user profile 
+    1) create a Profile.html and call the username
+    2) create a views Function
+    3) the profile will be accesable to the users if they logged or logged out so we need to put an authentication 
+    4) For authentication django provide an decorator import and decorator " from django.contrib.auth.decorators import login_required "
+    5) and add that decorator to the  Function
+    6) it will search that page in other  file
+    7) so we need to tell the django to search in other path
+    8) project -> settings -> Last Line -> LOGIN_URL = 'login'
+
+
+<--> User Profile and Picture <-->
+
+to give an User a Profile Information about the User
+
+1) Create a model for that in the user app
+2) to use the user import the following " from django.contrib.auth.models import User "
+3) Create a data for User in OneToOneFeld
+4) Create a data for image in imagefield
+5) And create a Str field to return the models "def __str__(self):
+    return f'{self.user.username} Profile'"
+6) Register this models to the admin page and Check In the Server
+7) Use thr Shell to interact with the Created page
+8) so that the Pictures that we upload will be saves in the Main app so We Need to Redirect that to another
+9) Create an MEDIA_ROOT and MEDIA_URL in the settings.py
